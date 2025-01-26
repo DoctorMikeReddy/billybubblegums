@@ -25,7 +25,7 @@ function _update()
 	if (show_menu == true) then
 		main_menu_logic()
 	elseif (game_over == false) then
-		update_coin()
+		--update_coin()
 		move_player()
 		check_hit()
 		--hit_coin()
@@ -42,7 +42,7 @@ function _draw()
 		draw_main_menu()
 		draw_cave()
 	else
-		draw_coin()
+		--draw_coin()
 		draw_cave()
 		draw_player()
 		draw_score()
@@ -127,15 +127,19 @@ end
 function check_hit()
 
 	for i=player.x, player.x+7 do
-		if (cave[i+1].top>player.y
-			or cave[i+1].btm<player.y+7) then
-				game_over=true
-				sfx(1)
-				-- high score
-				if (player.score > high_score) then
-					high_score = player.score
-					dset(1, high_score)
-				end
+		if (cave[i+1].top>player.y-14) then
+			player.state=-1
+			player.y+=2
+			player.dy=0
+			sfx(2)
+		elseif (cave[i+1].btm<player.y+7) then
+			game_over=true
+			sfx(1)
+			-- high score
+			if (player.score > high_score) then
+				high_score = player.score
+				dset(1, high_score)
+			end
 		end
 	end
 end
@@ -248,8 +252,8 @@ end
 
 function make_cave()
 	cave={{["top"]=5,["btm"]=119}}
-	top = 45 --how low can we go
-	btm = 120 --how hiiigh can we get
+	top = 30 --how low can we go
+	btm = 115 --how hiiigh can we get
 end
 
 function update_cave()
