@@ -10,6 +10,7 @@ __lua__
 high_score = 0
 show_menu = true
 cartdata("billybubblegums-v1")
+--dset(1,0)
 
 function _init()
  game_over = false
@@ -59,9 +60,9 @@ end
 function make_player()
 	player={}
 	player.x=24
-	player.y=60
+	player.y=64
 	player.dy=0
-	player.state=2
+	player.state=3
 	player.rise=3
 	player.fall=4
 	player.body=19
@@ -238,13 +239,14 @@ function draw_main_menu()
 end
 
 function ai_player_move()
- player.y += player.dy
-	for i=player.x, player.x+7 do
-		if (cave[i+1].btm<player.y+ rnd(20,10)) then
-			player_pump()
-			sfx(0)
-		end
-	end
+ player.y += (rnd(2)-1)/2 --player.dy
+ 
+--	for i=player.x, player.x+7 do
+--		if (cave[i+1].btm<player.y+ rnd(20,10)) then
+--			player_pump()
+--			--sfx(0)
+--		end
+--	end
 end
 
 -->8
